@@ -3,7 +3,7 @@ Free Code Camp Tech Documentation Project
 
 A [Free Code Camp](https://www.freecodecamp.org/) project.
 
-Learning a little HTML and CSS and as a bonus a bit of markdown, git and Github. :rocket:
+Learning a little HTML and CSS and as a bonus a bit of markdown, git and Github. :metal:
 
 Markdown Cheat Sheet
 <!-- Headings -->
