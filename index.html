@@ -44,11 +44,11 @@
          not actually recorded until you run <code>git commit</code>.</p>
       <p>In conjunction with these commands, you'll also need git status to view the state of the working directory and the staging area.</p>
       <p>To create an initial commit of the current directory, use the following two commands:</p>
-      <code>git add .<br />
-          git commit</code>
+      <div class="codeBlock"><code>git add .<br />
+          git commit</code></div>
           <p>Once you’ve got your project up-and-running, new files can be added by passing the path to git add:</p>
-          <code>git add hello.py<br />
-              git commit</code>
+          <div class="codeBlock"><code>git add hello.py<br />
+              git commit</code></div>
     </section>
     <section id="git_branch" class="main-section">
       <header>git branch</header>
@@ -62,12 +62,12 @@
          the <code>git checkout</code> and <code>git merge</code> commands.</p>
       <p>Common Options:</p>
       <ul>
-        <li>List all of the branches in your repository. This is synonymous with <code>git branch --list</code>.<br /><code>git branch</code></li>
-        <li>Create a new branch called &lt;branch&gt;. This does not check out the new branch.<br /><code>git branch &lt;branch&gt;</code></li>
-        <li>Delete the specified branch. This is a “safe” operation in that Git prevents you from deleting the branch if it has unmerged changes.<br /><code>git branch -d &lt;branch&gt;</code></li>
-        <li>Force delete the specified branch, even if it has unmerged changes. This is the command to use if you want to permanently throw away all of the commits associated with a particular line of development.<br /><code>git branch -D &lt;branch&gt;</code></li>
-        <li>Rename the current branch to &lt;branch&gt;<br /><code>git branch -m &lt;branch&gt;<br /></code></li>
-        <li>List all remote branches.<br /><code>git branch -a</code></li>
+        <li>List all of the branches in your repository. This is synonymous with <code>git branch --list</code>.<div class="codeBlock"><code>git branch</code></div></li>
+        <li>Create a new branch called &lt;branch&gt;. This does not check out the new branch.<div class="codeBlock"><code>git branch &lt;branch&gt;</code></div></li>
+        <li>Delete the specified branch. This is a “safe” operation in that Git prevents you from deleting the branch if it has unmerged changes.<div class="codeBlock"><code>git branch -d &lt;branch&gt;</code></div></li>
+        <li>Force delete the specified branch, even if it has unmerged changes. This is the command to use if you want to permanently throw away all of the commits associated with a particular line of development.<div class="codeBlock"><code>git branch -D &lt;branch&gt;</code></div></li>
+        <li>Rename the current branch to &lt;branch&gt;<div class="codeBlock"><code>git branch -m &lt;branch&gt;</code></div></li>
+        <li>List all remote branches.<div class="codeBlock"><code>git branch -a</code></div></li>
       </ul>
     </section>
     <section id="git_checkout" class="main-section">
