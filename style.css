@@ -55,17 +55,20 @@ header {
   background-color: rgba(8, 224, 181, 0.2);
   margin: 10px 30px 30px 20px;
   padding: 5px 5px;
+  display: block;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
   #navbar {
     position:absolute;
-    width:100%;
-    height: 200px;
+    width:90%;
+    height: 220px;
+    border: 2px double;
+    margin: 0 20px;
   }
 
   #main-doc {
-    margin-top: 220px;
+    margin-top: 230px;
     margin-left: 0px;
   }
 
