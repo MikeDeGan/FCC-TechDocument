@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style.css">
   <title>Technical Document</title>
 </head>
-
 <body>
   <nav id="navbar">
     <header>Git Commands</header>
@@ -206,28 +205,66 @@
       <p>Fetching downloads a branch from another repository, along with all of its associated commits and files. But,
         it doesn't try to integrate anything into your local repository. This gives you a chance to inspect changes
         before merging them with your project.</p>
+      <p>The git fetch command downloads commits, files, and refs from a remote repository into your local repo.
+        Fetching is what you do when you want to see what everybody else has been working on. It’s similar to svn
+        update in that it lets you see how the central history has progressed, but it doesn’t force you to actually
+        merge the changes into your repository. Git isolates fetched content as a from existing local content, it has
+        absolutely no effect on your local development work. Fetched content has to be explicitly checked out using the
+        git checkout command. This makes fetching a safe way to review commits before integrating them with your local
+        repository.</p>
+
     </section>
     <section id="git_init" class="main-section">
       <header>git init</header>
       <p>Initializes a new Git repository. If you want to place a project under revision control, this is the first
         command you need to learn.</p>
+      <p>The git init command creates a new Git repository. It can be used to convert an existing, unversioned project
+        to a Git repository or initialize a new, empty repository. Most other Git commands are not available outside of
+        an initialized repository, so this is usually the first command you'll run in a new project.</p>
     </section>
     <section id="git_log" class="main-section">
       <header>git log</header>
       <p>Lets you explore the previous revisions of a project. It provides several formatting options for displaying
         committed snapshots.</p>
+      <p>The purpose of any version control system is to record changes to your code. This gives you the power to go
+        back into your project history to see who contributed what, figure out where bugs were introduced, and revert
+        problematic changes. But, having all of this history available is useless if you don’t know how to navigate it.
+        That’s where the git log command comes in.</p>
+      <p>The advanced features of git log can be split into two categories: formatting how each commit is displayed,
+        and filtering which commits are included in the output. Together, these two skills give you the power to go
+        back into your project and find any information that you could possibly need.</p>
+
     </section>
     <section id="git_merge" class="main-section">
       <header>git merge</header>
       <p>A powerful way to integrate changes from divergent branches. After forking the project history with <code>git
           branch</code>,
         <code>git merge</code> lets you put it back together again.</p>
+      <p>Merging is Git's way of putting a forked history back together again. The git merge command lets you take the
+        independent lines of development created by git branch and integrate them into a single branch.</p>
+      <p>Common usage:</p>
+      <ul>
+        <li>Merge the specified branch into the current branch. Git will determine the merge algorithm automatically
+          (discussed below).
+          <code class="codeBlock">git merge &lt;branch&gt;</code>
+        </li>
+        <li>Merge the specified branch into the current branch, but always generate a merge commit (even if it was a
+          fast-forward merge). This is useful for documenting all merges that occur in your repository.
+          <code class="codeBlock">git merge --no-ff &lt;branch&gt;</code>
+        </li>
+      </ul>
     </section>
     <section id="git_pull" class="main-section">
       <header>git pull</header>
       <p>Pulling is the automated version of <code>git fetch</code>. It downloads a branch from a remote repository,
         then immediately
         merges it into the current branch. This is the Git equivalent of svn update.</p>
+      <p>The git pull command is used to fetch and download content from a remote repository and immediately update the
+        local repository to match that content. Merging remote upstream changes into your local repository is a common
+        task in Git-based collaboration work flows. The git pull command is actually a combination of two other
+        commands, git fetch followed by git merge. In the first stage of operation git pull will execute a git fetch
+        scoped to the local branch that HEAD is pointed at. Once the content is downloaded, git pull will enter a merge
+        workflow. A new merge commit will be-created and HEAD updated to point at the new commit.</p>
     </section>
     <section id="git_push" class="main-section">
       <header>git push</header>
@@ -235,45 +272,93 @@
         repository,
         which serves as a convenient way to publish contributions. This is like svn commit, but it sends a series of
         commits instead of a single changeset.</p>
+      <p>The git push command is used to upload local repository content to a remote repository. Pushing is how you
+        transfer commits from your local repository to a remote repo. It's the counterpart to git fetch, but whereas
+        fetching imports commits to local branches, pushing exports commits to remote branches. Remote branches are
+        configured using the git remote command. Pushing has the potential to overwrite changes, caution should be
+        taken when pushing.</p>
     </section>
     <section id="git_rebase" class="main-section">
       <header>git rebase</header>
       <p>Rebasing lets you move branches around, which helps you avoid unnecessary merge commits. The resulting linear
         history is often much easier to understand and explore.</p>
+      <p>As an alternative to merging, you can rebase the feature branch onto master branch using the following
+        commands:</p>
+      <code class="codeBlock">git checkout feature<br />
+        git rebase master</code>
+      <p>This moves the entire feature branch to begin on the tip of the master branch, effectively incorporating all
+        of the new commits in master. But, instead of using a merge commit, rebasing re-writes the project history by
+        creating brand new commits for each commit in the original branch.</p>
     </section>
     <section id="git_rebase_-i" class="main-section">
       <header>git rebase -i</header>
       <p>The -i flag is used to begin an interactive rebasing session. This provides all the benefits of a normal
         rebase,
         but gives you the opportunity to add, edit, or delete commits along the way.</p>
+      <p>Interactive rebasing gives you the opportunity to alter commits as they are moved to the new branch. This is
+        even more powerful than an automated rebase, since it offers complete control over the branch’s commit history.
+        Typically, this is used to clean up a messy history before merging a feature branch into master.</p>
+
     </section>
     <section id="git_reflog" class="main-section">
       <header>git reflog</header>
       <p>Git keeps track of updates to the tip of branches using a mechanism called reflog. This allows you to go back
         to changesets even though they are not referenced by any branch or tag.</p>
+      <p>The reflog is Git’s safety net. It records almost every change you make in your repository, regardless of
+        whether you committed a snapshot or not. You can think of it as a chronological history of everything you’ve
+        done in your local repo. To view the reflog, run the git reflog command. It should output something that looks
+        like the following:</p>
+      <code class="codeBlock">400e4b7 HEAD@{0}: checkout: moving from master to HEAD~2<br />
+        0e25143 HEAD@{1}: commit (amend): Integrate some awesome feature into `master`<br />
+        00f5425 HEAD@{2}: commit (merge): Merge branch ';feature';<br />
+        ad8621a HEAD@{3}: commit: Finish the feature</code>
     </section>
     <section id="git_remote" class="main-section">
       <header>git remote</header>
       <p>A convenient tool for administering remote connections. Instead of passing the full URL to the fetch, pull,
         and push commands, it lets you use a more meaningful shortcut.</p>
+      <p>The git remote command lets you create, view, and delete connections to other repositories. Remote connections
+        are more like bookmarks rather than direct links into other repositories. Instead of providing real-time access
+        to another repository, they serve as convenient names that can be used to reference a not-so-convenient URL.</p>
     </section>
     <section id="git_reset" class="main-section">
       <header>git reset</header>
       <p>Undoes changes to files in the working directory. Resetting lets you clean up or completely remove changes
         that have not been pushed to a public repository.</p>
+      <p>On the commit-level, resetting is a way to move the tip of a branch to a different commit. This can be used to
+        remove commits from the current branch. For example, the following command moves the hotfix branch backwards by
+        two commits.</p>
+      <code class="codeBlock">git checkout hotfix<br />
+        git reset HEAD~2</code>
+      <p>The two commits that were on the end of hotfix are now dangling, or orphaned commits. This means they will be
+        deleted the next time Git performs a garbage collection. In other words, you’re saying that you want to throw
+        away these commits.</p>
     </section>
     <section id="git_revert" class="main-section">
       <header>git revert</header>
       <p>Undoes a committed snapshot. When you discover a faulty commit, reverting is a safe and easy way to
         completely remove it from the code base.</p>
+      <p>The git revert command can be considered an 'undo' type command, however, it is not a traditional undo
+        operation. Instead of removing the commit from the project history, it figures out how to invert the changes
+        introduced by the commit and appends a new commit with the resulting inverse content. This prevents Git from
+        losing history, which is important for the integrity of your revision history and for reliable collaboration.</p>
     </section>
     <section id="git_status" class="main-section">
       <header>git status</header>
       <p>Displays the state of the working directory and the staged snapshot. You’ll want to run this in
         conjunction with <code>git add</code> and <code>git commit</code> to see exactly what’s being included in the
         next snapshot.</p>
+      <p>The git status command displays the state of the working directory and the staging area. It lets you see which
+        changes have been staged, which haven’t, and which files aren’t being tracked by Git. Status output does not
+        show you any information regarding the committed project history. For this, you need to use git log.</p>
+      <p>List which files are staged, unstaged, and untracked.</p>
+      <code class="codeBlock">git status</code>
+    </section>
+    <section id="reference">
+      <p>All definitions and descriptions on this page have been taken from <a href="https://www.atlassian.com/" target="_blank">www.atlassian.com</a></p>
     </section>
   </main>
+
 </body>
 
 </html>
